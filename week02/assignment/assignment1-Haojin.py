@@ -44,13 +44,7 @@ assert print_sum(5) == "15"
 # Q3. Write a program to check is a year is leap year (x is always > 0)
 
 def is_leap_year(year: int) -> bool:
-    if year > 0:
-        if year % 400 == 0:
-            return True
-        elif year % 4 == 0 and year % 100 != 0:
-            return True
-        else:
-            return False
+    return True if (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0) else False
 
 
 # print(is_leap_year(2022))
@@ -79,10 +73,7 @@ assert to_upper_case(["Amazon", "Apple"]) == ["AMAZON", "APPLE"]
 # https://baike.baidu.com/item/%E5%BC%82%E6%88%96/10993677?fromtitle=xor&fromid=64178
 
 def xor(a: bool, b: bool) -> bool:
-    if bool(a or b) != bool(a and b):
-        return True
-    else:
-        return False
+    return True if a != b else False
 
 
 # print(xor(True, True))
