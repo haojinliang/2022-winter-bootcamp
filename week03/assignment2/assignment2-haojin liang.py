@@ -111,13 +111,19 @@ def create_arr(count: int, dup: int) -> [int]:
 # Complete this    
 def bsearch(arr: [int], target: int) -> (int):
     found = False
-    guess = len(arr)-1
-    while not found:
-        if target == arr[guess]:
-            found = True
-        else:
-            guess = guess - 1
-    return (arr.index(target), guess) if target in arr else (-1, -1)
+    left = arr.index(target)
+    right = len(arr)-1
+    if target in arr:
+        while not found:
+            if target == arr[right]:
+                found = True
+            else:
+                right = right - 1
+    else:
+        left = -1
+        right = -1
+
+    return (left, right)
 
 
 # print(bsearch(create_arr(1000, 5), 5))
@@ -143,11 +149,14 @@ def extract_and_apply(l, p, f):
             result.append(f(x)) 
     return result 
 # Rewrite extract_and_apply(l, p, f) in one line using a list comprehension. 
+
 def extract_and_apply(l, p, f):
     return [f(x) for x in l if p(x)]
 
 # (2). [5 points] Write a function concatenate(seqs) that returns a list containing the concatenation of the elements of the input sequences.
 # Your implementation should consist of a single list comprehension, and should not exceed one line.
+
+
 def concatenate(seqs):
     return [j for i in seqs for j in i]
 
