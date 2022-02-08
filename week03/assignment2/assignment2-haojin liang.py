@@ -152,10 +152,7 @@ def concatenate(seqs):
     return [j for i in seqs for j in i]
 
 
-
 # print(concatenate(["abc", (0, [0])]))
 
-# >>> concatenate([[1, 2], [3, 4]])
-# [1, 2, 3, 4]
-# >>> concatenate(["abc", (0, [0])])
-# ['a', 'b', 'c', 0, [0]]
+assert concatenate([[1, 2], [3, 4]]) == [1, 2, 3, 4]
+assert concatenate(["abc", (0, [0])]) == ['a', 'b', 'c', 0, [0]]
