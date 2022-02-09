@@ -7,10 +7,7 @@
 
 
 def factorial(x: int) -> int:
-    if x == 0:
-        return 1
-    else:
-        return x * factorial(x - 1)
+    return 1
 
 
 assert factorial(0) == 1
@@ -22,10 +19,7 @@ assert factorial(9) == 362880
 # [1 + 2 + ... + x] and x is always >= 1.
 
 def print_sum(x: int) -> str:
-    sum_value = 0
-    for i in range(1, x + 1):
-        sum_value = sum_value + i
-    return str(sum_value)
+    return ""
 
 
 assert print_sum(1) == "1"
@@ -36,10 +30,7 @@ assert print_sum(5) == "15"
 # Q3. Write a program to check is a year is leap year (x is always > 0)
 
 def is_leap_year(year: int) -> bool:
-    if year % 400 == 0 or year % 4 == 0 and year % 100 != 0:
-        return True
-    else:
-        return False
+    return False
 
 
 assert is_leap_year(2000)
@@ -51,9 +42,7 @@ assert not is_leap_year(2001)
 # Q4. Write a program to convert a list of lowercase words to uppercase words.
 
 def to_upper_case(words: [str]) -> [str]:
-    for letter in range(len(words)):
-        words[letter] = words[letter].upper()
-    return words
+    return []
 
 
 assert to_upper_case(["abc", "de"]) == ["ABC", "DE"]
@@ -64,7 +53,7 @@ assert to_upper_case(["Amazon", "Apple"]) == ["AMAZON", "APPLE"]
 # https://baike.baidu.com/item/%E5%BC%82%E6%88%96/10993677?fromtitle=xor&fromid=64178
 
 def xor(a: bool, b: bool) -> bool:
-    return a and not b or b and not a
+    return False
 
 
 assert not xor(True, True)
@@ -72,31 +61,16 @@ assert xor(True, False)
 assert xor(False, True)
 assert not xor(False, False)
 
-# Q6. Write a Python program to display the current date and time under standard ISO 8601. e.g. 2021-12-03T10:15:30Z
-import datetime as dt
 
+# Q6. Write a Python program to display the current date and time under standard ISO 8601. e.g. 2021-12-03T10:15:30Z
 
 def get_current_time() -> str:
-    current_time = dt.datetime.now().replace(microsecond=0).isoformat()
-    return current_time + "Z"
+    return ""
 
 
 assert "T" in get_current_time()
 assert "Z" in get_current_time()
 assert 20 == len(get_current_time())
 
-
 # Q7. Write a Python program to sum of two given integers. However, if the sum is between 15 to 20 it will return 20
 # please define function and test yourself.
-
-
-def get_sum(a: int, b: int) -> int:
-    sum_value = a + b
-    if 15 <= sum_value <= 20:
-        sum_value = 20
-    return sum_value
-
-
-assert get_sum(5, 11) == 20
-assert get_sum(3, 7) == 10
-assert get_sum(10, 11) == 21
