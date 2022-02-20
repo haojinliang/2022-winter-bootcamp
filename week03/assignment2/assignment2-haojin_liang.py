@@ -27,7 +27,18 @@ assert not is_prime(0)
 # Output [3,4,5,6,7,1,2]
 
 def rotate(ar: [int], d: int) -> [int]:
-    return ar[d % len(ar):]+ar[0:d % len(ar)]
+    d = d % len(ar)
+    inplace_inverse(ar, 0, d - 1)
+    inplace_inverse(ar, d, len(ar) - 1)
+    inplace_inverse(ar, 0, len(ar) - 1)
+    return ar
+
+
+def inplace_inverse(ar, start, end):
+    while start < end:
+        ar[start], ar[end] = ar[end], ar[start]
+        start += 1
+        end -= 1
 
 
 # print(rotate([1,2,3], 4))
@@ -69,7 +80,7 @@ assert selection_sort([[1, 100], [2, 70], [3, 95], [4, 66], [5, 98]]) == [[4, 66
 def convert(tup: (any), di: {any, any}) -> None: 
     i = 0
     while i < len(tup):
-        di.setdefault(tup[i], tup[i+1])
+        di[tup[i]] = tup[i+1]
         i = i + 2
 
     # Do NOT RETURN di, EDIT IN-PLACE
@@ -110,20 +121,40 @@ def create_arr(count: int, dup: int) -> [int]:
         
 # Complete this    
 def bsearch(arr: [int], target: int) -> (int):
-    found = False
-    left = arr.index(target)
-    right = len(arr)-1
-    if target in arr:
-        while not found:
-            if target == arr[right]:
-                found = True
-            else:
-                right = right - 1
-    else:
-        left = -1
-        right = -1
+    return find_left(arr, target), find_right(arr, target)
 
-    return (left, right)
+
+def find_left(arr, target):
+    start = 0
+    end = len(arr)-1
+    while start < end - 1:
+        mid = (start + end) // 2
+        if arr[mid] >= target:
+            end = mid
+        else:
+            start = mid + 1
+    if arr[start] == target:
+        return start
+    if arr[end] == target:
+        return end
+    return -1
+
+
+def find_right(arr, target):
+    start = 0
+    end = len(arr)-1
+    while start < end - 1:
+        mid = (start + end) // 2
+        if arr[mid] <= target:
+            start = mid
+        else:
+            end = mid - 1
+    if arr[end] == target:
+        return end
+    if arr[start] == target:
+        return start
+    return -1
+
 
 
 # print(bsearch(create_arr(1000, 5), 5))
