@@ -1,4 +1,5 @@
 # -- TODO: Part 2, write an API client so we are able to query
+
 def get_rate(client_id):
     """
     would expect to return a float rate.
@@ -6,12 +7,10 @@ def get_rate(client_id):
     :param client_id: string, e.g. 'client1'
     :return: float, e.g. 0.2
     """
-    # Sample code for getting http response. Need to edit
     import requests
     response = requests.get("http://127.0.0.1:5000/rate/" + client_id)
     print(response)
-    return response.content
-    # Sample end
+    return float(response.content)
 # -- TODO END: Part 2
 
 
@@ -19,7 +18,7 @@ def get_rate(client_id):
 def upsert_client_rate(client_id, rate):
     # call http post - http post call to 127.0.0.1:5000/rate
     import requests
-    response = requests.post("http://127.0.0.1:5000/rate", json={"client_id": 1})  # what to post?
+    response = requests.post("http://127.0.0.1:5000/rate", json={"client_id": client_id, "rate":rate})  # what to post?
     # https://requests.readthedocs.io/en/master/user/quickstart/
 # -- TODO END: Part 5
 
@@ -37,12 +36,21 @@ def test_get_rate():
 
 # -- TODO: Part 6, Test Your API for upsert client-rate
 def test_upsert_rate():
-    upsert_client_rate("client_id", "rate")
+    # test create
+    upsert_client_rate("client0", 0.1)
+    assert get_rate("client0") == 0.1
+
+    # test update
+    new_rate = get_rate('client1') + 0.1
+    upsert_client_rate("client1", new_rate)
+    assert get_rate('client1') == new_rate
+
+    upsert_client_rate("client0", 0)
 # -- TODO END: Part 6
 
 
 # DO NOT DELETE
 if __name__ == '__main__':
-    # test_get_rate()
+    test_get_rate()
     test_upsert_rate()
     # you can add your test functions here
